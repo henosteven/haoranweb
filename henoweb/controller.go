@@ -2,6 +2,8 @@ package henoweb
 
 import (
     "reflect"
+    "net/http"
+    "fmt"
 )
 
 type Controller interface {
@@ -10,6 +12,10 @@ type Controller interface {
 type HENOController struct {
    ControllerName string
    cp Controller
+}
+
+func (_ HENOController) Index(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "welcome~page")
 }
 
 func Invoke(h Controller, methodName string, input ...interface{}) {

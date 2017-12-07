@@ -38,7 +38,7 @@ func example(w http.ResponseWriter, r *http.Request) {
 }
 
 type IndexController struct {
-    *henoweb.HENOController
+    henoweb.HENOController
 }
 
 func (_ IndexController) Index(w http.ResponseWriter, r *http.Request) {
