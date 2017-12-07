@@ -1,19 +1,22 @@
 package henoweb
 
 import (
-    "net/http"
-    "fmt"
+    "reflect"
 )
 
 type Controller interface {
-    ServeHTTP(w http.ResponseWriter, r *http.Request)
 }
 
 type HENOController struct {
    ControllerName string
-   Action []string
+   cp Controller
 }
 
-func (c HENOController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "hello~my~controller")
+func Invoke(h Controller, methodName string, input ...interface{}) {
+    cv := reflect.ValueOf(h)
+    var argv = make([]reflect.Value, 0)
+    for _, arg := range input {
+        argv = append(argv, reflect.ValueOf(arg)) 
+    }
+    cv.MethodByName(methodName).Call(argv)
 }

@@ -2,7 +2,6 @@ package henoweb
 
 import (
     "net/http"
-    "reflect"
     "fmt"
 )
 
@@ -32,13 +31,12 @@ func (router *HenoRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusNotFound)
         fmt.Fprintln(w, "~opps 404~")
     } else {
-        fmt.Println(reflect.TypeOf(h))
         switch h.(type) {
             case http.HandlerFunc:
                 h.(http.HandlerFunc).ServeHTTP(w, r) 
             case Controller:
-                h.(Controller).ServeHTTP(w, r)
-                fmt.Fprintln(w, "~ ya controller ~")
+                fmt.Println(r.URL)
+                Invoke(h, "Index", w, r)
         }
     }
 }

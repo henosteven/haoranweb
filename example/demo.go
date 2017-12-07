@@ -17,7 +17,7 @@ func main() {
     henoweb.RegisterFuncRouter("/example", example)
 
     indexController := IndexController{}
-    henoweb.RegisterControllerRouter("/example2", indexController)
+    henoweb.RegisterControllerRouter("/index", indexController)
     henoweb.Run()
 }
 
@@ -38,5 +38,9 @@ func example(w http.ResponseWriter, r *http.Request) {
 }
 
 type IndexController struct {
-    henoweb.HENOController
+    *henoweb.HENOController
+}
+
+func (_ IndexController) Index(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "hello~indexc~indexa")
 }

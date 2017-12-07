@@ -14,7 +14,7 @@ type SignalHookHandler func() error
 func RegisterSignalHook(sig os.Signal, sigHandler func() error) {
     handleSlice, ok := SignalHook[sig]
     if !ok {
-        handleSlice = make([]SignalHookHandler, 10)
+        handleSlice = make([]SignalHookHandler, 0)
     }
     handleSlice = append(handleSlice, SignalHookHandler(sigHandler))
     SignalHook[sig] = handleSlice
