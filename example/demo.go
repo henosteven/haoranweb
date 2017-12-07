@@ -1,7 +1,7 @@
 package main
 
 import (
-    "henoweb"
+    "github.com/henosteven/haoranweb/henoweb"
     "syscall"
     "fmt"
     "net/http"
