@@ -44,3 +44,7 @@ type IndexController struct {
 func (_ IndexController) Index(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "hello~indexc~indexa")
 }
+
+func (_ IndexController) Say(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "hello~indexc~saya")
+}
