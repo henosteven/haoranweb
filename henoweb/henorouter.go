@@ -44,8 +44,15 @@ func (router *HenoRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
             h.(http.HandlerFunc).ServeHTTP(w, r) 
         case Controller:
             action = Ucfirst(action)
-            Invoke(h, action, w, r)
+            err := Invoke(h, action, w, r)
+            if err != nil {
+                http.HandlerFunc(Page404).ServeHTTP(w, r)
+            }
     }
+}
+
+func Page404(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "page-404-no-action")
 }
 
 func getControllerAction(path string) (action, controller string) {
