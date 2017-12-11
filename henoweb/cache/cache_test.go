@@ -5,7 +5,7 @@ import (
 )
 
 func TestGet(t *testing.T) {
-    InitRedisServer()
+    InitRedisServer("ip:6379")
     Set("user", "jinjing")
     Hset("jinjing", "name", "jinjing")
     Hset("jinjing", "age", "28")

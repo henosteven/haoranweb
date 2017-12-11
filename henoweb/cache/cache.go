@@ -11,9 +11,9 @@ type CacheConfig struct {
 
 var RedisConn redis.Conn 
 
-func InitRedisServer() {
+func InitRedisServer(addr string) {
     var err error
-    RedisConn, err = redis.Dial("tcp", "10.94.107.14:6379")
+    RedisConn, err = redis.Dial("tcp", addr)
     if err != nil {
         fmt.Println(err)
     }
