@@ -22,8 +22,11 @@ func GetSSL() {
 
 }
 
-func Post(url string, argv map[string]string) string{
-    td := time.Duration(1) * time.Second
+func Post(url string, argv map[string]string, timeout string) string{
+    td, err := time.ParseDuration(timeout)
+    if err != nil {
+        td = time.Duration(1) * time.Second
+    }
     return httpDo(url, "POST", argv, td)
 }
 
