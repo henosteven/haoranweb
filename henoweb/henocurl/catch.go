@@ -34,9 +34,10 @@ func PostSSL() {
 
 }
 
-func httpDo(url, method string, argv map[string]string, td time.Duration) string{
+func httpDo(url, method string, argv map[string]string, td time.Duration) string {
     
-    client := &http.Client{}
+    tr := &http.Transport{}
+    client := &http.Client{Transport: tr}
 
     req, err := http.NewRequest(method, url, strings.NewReader(""))
     if err != nil {
@@ -68,7 +69,9 @@ func httpDo(url, method string, argv map[string]string, td time.Duration) string
             }
             return string(body)
         case <-ctx.Done():
-            log.Println("~opps~timeout")
+            tr.CancelRequest(req)
+            <-ch
+            log.Println(ctx.Err())
             return ""
     }
 }

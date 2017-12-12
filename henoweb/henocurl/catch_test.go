@@ -6,6 +6,6 @@ import (
 )
 
 func TestGet(t *testing.T) {
-    response := Get("http://www.baidu.com", "100ms")
+    response := Get("http://www.baidu.com", "10ms")
     log.Print(response)
 }
