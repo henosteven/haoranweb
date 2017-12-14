@@ -1,9 +1,9 @@
 package henoweb
 
 import (
-    "net"
+	"net"
 )
 
 type HenoConn struct {
-    net.Conn
-} 
+	net.Conn
+}
